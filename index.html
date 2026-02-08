@@ -3,110 +3,159 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emprender +50 | Tu experiencia es tu capital</title>
+    <title>Emprende +50 | Reinventarse con Experiencia</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
-        /* Ajuste para lectura fácil en +50 */
-        body { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 18px; color: #333; }
-        .hero-bg { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
+        body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+        .gradient-brand { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); }
     </style>
 </head>
-<body class="bg-gray-50">
+<body class="bg-gray-50 text-gray-800">
 
-    <header class="hero-bg text-white py-12 px-4 text-center shadow-lg">
-        <div class="max-w-4xl mx-auto">
-            <h1 class="text-3xl md:text-5xl font-bold mb-4">No empieces de cero. Empieza desde tu experiencia.</h1>
-            <p class="text-xl md:text-2xl font-light opacity-90">
-                Guías prácticas de negocios rentables en Argentina diseñadas para personas mayores de 50 años que buscan reinventarse.
+    <nav class="bg-white shadow-sm py-4">
+        <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+            <span class="text-2xl font-bold text-blue-900 italic">Emprende+50</span>
+            <span class="text-sm font-medium bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Argentina</span>
+        </div>
+    </nav>
+
+    <header class="gradient-brand text-white py-16 px-4">
+        <div class="max-w-4xl mx-auto text-center">
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
+                Su experiencia vale dinero. <br>Es hora de monetizarla.
+            </h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90 font-light">
+                Descargue guías prácticas paso a paso para iniciar negocios rentables en Argentina, diseñados específicamente para personas con trayectoria y compromiso.
             </p>
+            <div class="flex justify-center gap-4 text-sm font-semibold">
+                <span>✓ Sin jefes</span>
+                <span>✓ Baja inversión</span>
+                <span>✓ Confiable</span>
+            </div>
         </div>
     </header>
 
-    <section class="py-8 bg-white border-b">
-        <div class="max-w-4xl mx-auto text-center px-4">
-            <p class="text-gray-600 italic">"El mercado no busca juventud, busca confianza y responsabilidad. Justo lo que usted tiene."</p>
+    <main class="max-w-6xl mx-auto py-16 px-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col">
+                <div class="p-8 flex-grow">
+                    <h3 class="text-2xl font-bold mb-3">Acompañamiento Senior</h3>
+                    <p class="text-gray-600 mb-6">Gestione servicios de asistencia no médica para adultos mayores. La confianza es su mayor activo.</p>
+                    <div class="text-3xl font-bold text-blue-600 mb-6">$5.000 <span class="text-sm text-gray-400 font-normal">ARS</span></div>
+                </div>
+                <div class="p-8 pt-0">
+                    <a href="TU_LINK_MERCADO_PAGO_1" 
+                       onclick="guardarSeleccion('Guía Senior Care')"
+                       class="block w-full text-center bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-md">
+                        Comprar Guía PDF
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col">
+                <div class="p-8 flex-grow">
+                    <h3 class="text-2xl font-bold mb-3">Gestoría de Confianza</h3>
+                    <p class="text-gray-600 mb-6">Servicios de trámites y logística para PyMEs. Aproveche su conocimiento de la burocracia local.</p>
+                    <div class="text-3xl font-bold text-blue-600 mb-6">$5.000 <span class="text-sm text-gray-400 font-normal">ARS</span></div>
+                </div>
+                <div class="p-8 pt-0">
+                    <a href="TU_LINK_MERCADO_PAGO_2" 
+                       onclick="guardarSeleccion('Guía Gestoría')"
+                       class="block w-full text-center bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-md">
+                        Comprar Guía PDF
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-blue-50 rounded-2xl shadow-xl border-2 border-blue-500 overflow-hidden flex flex-col transform md:scale-105">
+                <div class="bg-blue-500 text-white text-center py-2 text-sm font-bold tracking-widest">RECOMENDADO</div>
+                <div class="p-8 flex-grow text-center">
+                    <h3 class="text-2xl font-bold mb-3 italic">Combo 7 Emprendimientos</h3>
+                    <p class="text-gray-700 mb-6 font-medium text-lg">Acceda a TODAS las guías. La solución definitiva para su reinvención laboral.</p>
+                    <div class="text-4xl font-black text-blue-700 mb-2">$20.000</div>
+                    <p class="text-sm text-green-600 font-bold mb-6 italic">Ahorre más del 40%</p>
+                </div>
+                <div class="p-8 pt-0">
+                    <a href="TU_LINK_MERCADO_PAGO_COMBO" 
+                       onclick="guardarSeleccion('Pack Completo')"
+                       class="block w-full text-center bg-gray-900 text-white font-bold py-5 rounded-xl hover:bg-black transition shadow-xl">
+                        DESCARGAR TODO EL PACK
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col">
+                <div class="p-8 flex-grow">
+                    <h3 class="text-2xl font-bold mb-3">Mantenimiento de Hogar</h3>
+                    <p class="text-gray-600 mb-6">Oficios de precisión y responsabilidad. El cliente busca a alguien que cumpla y sepa.</p>
+                    <div class="text-3xl font-bold text-blue-600 mb-6">$5.000 <span class="text-sm text-gray-400 font-normal">ARS</span></div>
+                </div>
+                <div class="p-8 pt-0">
+                    <a href="TU_LINK_MERCADO_PAGO_4" 
+                       onclick="guardarSeleccion('Guía Reparaciones')"
+                       class="block w-full text-center bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-md">
+                        Comprar Guía PDF
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col">
+                <div class="p-8 flex-grow">
+                    <h3 class="text-2xl font-bold mb-3">Viandas Caseras</h3>
+                    <p class="text-gray-600 mb-6">Cree un negocio de cocina saludable desde casa para el barrio u oficinas.</p>
+                    <div class="text-3xl font-bold text-blue-600 mb-6">$5.000 <span class="text-sm text-gray-400 font-normal">ARS</span></div>
+                </div>
+                <div class="p-8 pt-0">
+                    <a href="TU_LINK_MERCADO_PAGO_5" 
+                       onclick="guardarSeleccion('Guía Viandas')"
+                       class="block w-full text-center bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-md">
+                        Comprar Guía PDF
+                    </a>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col">
+                <div class="p-8 flex-grow">
+                    <h3 class="text-2xl font-bold mb-3">Mentoría PyME</h3>
+                    <p class="text-gray-600 mb-6">Asesore a dueños de negocios pequeños sobre procesos y gestión profesional.</p>
+                    <div class="text-3xl font-bold text-blue-600 mb-6">$5.000 <span class="text-sm text-gray-400 font-normal">ARS</span></div>
+                </div>
+                <div class="p-8 pt-0">
+                    <a href="TU_LINK_MERCADO_PAGO_6" 
+                       onclick="guardarSeleccion('Guía Mentoría')"
+                       class="block w-full text-center bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-md">
+                        Comprar Guía PDF
+                    </a>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+    <section class="bg-gray-100 py-12">
+        <div class="max-w-4xl mx-auto px-4 text-center">
+            <h4 class="text-lg font-bold mb-4 uppercase tracking-widest text-gray-500 italic">Pago 100% Seguro</h4>
+            <p class="text-gray-600 leading-relaxed">
+                Al hacer clic en el botón, será redirigido a <strong>Mercado Pago</strong> para abonar de forma segura. 
+                Luego de pagar, el sistema lo traerá automáticamente de regreso para que pueda descargar su archivo PDF.
+            </p>
         </div>
     </section>
 
-    <div class="max-w-6xl mx-auto py-12 px-4">
-        <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Seleccione su próximo emprendimiento</h2>
-        
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="products-container">
-            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-gray-100">
-                <div class="p-6">
-                    <div class="uppercase tracking-wide text-sm text-blue-600 font-bold">Servicios</div>
-                    <h3 class="mt-2 text-2xl leading-tight font-semibold text-gray-900">Acompañamiento Senior</h3>
-                    <p class="mt-2 text-gray-600">Convierta su empatía y responsabilidad en un servicio premium para familias que necesitan confianza.</p>
-                    <div class="mt-4 flex items-baseline">
-                        <span class="text-2xl font-bold text-gray-900">$5.000</span>
-                        <span class="ml-1 text-gray-500 text-sm">ARS</span>
-                    </div>
-                    <button onclick="comprar('Guía Senior Care', 5000, https://mpago.la/2dmCk1S)" class="mt-4 w-full bg-blue-600 text-white font-bold py-3 px-4 rounded hover:bg-blue-700 transition duration-200">
-                        Descargar Guía
-                    </button>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-gray-100">
-                <div class="p-6">
-                    <div class="uppercase tracking-wide text-sm text-green-600 font-bold">Gestión</div>
-                    <h3 class="mt-2 text-2xl leading-tight font-semibold text-gray-900">Gestoría de Confianza</h3>
-                    <p class="mt-2 text-gray-600">Utilice su "conocimiento de calle" para solucionar trámites a PyMEs y profesionales ocupados.</p>
-                    <div class="mt-4 flex items-baseline">
-                        <span class="text-2xl font-bold text-gray-900">$5.000</span>
-                        <span class="ml-1 text-gray-500 text-sm">ARS</span>
-                    </div>
-                    <button onclick="comprar('Guía Gestoría', 5000, https://mpago.la/2dmCk1S)" class="mt-4 w-full bg-green-600 text-white font-bold py-3 px-4 rounded hover:bg-green-700 transition duration-200">
-                        Descargar Guía
-                    </button>
-                </div>
-            </div>
-
-            <div class="bg-yellow-50 rounded-xl shadow-lg overflow-hidden transform scale-105 border-2 border-yellow-400">
-                <div class="bg-yellow-400 py-2 text-center font-bold text-yellow-900 text-sm">MÁS VENDIDO</div>
-                <div class="p-6">
-                    <div class="uppercase tracking-wide text-sm text-yellow-700 font-bold">Pack Completo</div>
-                    <h3 class="mt-2 text-2xl leading-tight font-bold text-gray-900">Las 7 Guías de Negocio</h3>
-                    <p class="mt-2 text-gray-700">Acceda a todas las investigaciones, casos de éxito y pasos a paso. Ahorre un 40%.</p>
-                    <div class="mt-4 flex items-baseline">
-                        <span class="text-3xl font-bold text-gray-900">$20.000</span>
-                        <span class="ml-1 text-gray-500 text-sm">ARS</span>
-                    </div>
-                    <button onclick="comprar('Pack Completo', 20000, https://mpago.la/1F2nhuM)" class="mt-4 w-full bg-gray-900 text-white font-bold py-4 px-4 rounded hover:bg-gray-800 transition duration-200 shadow-lg">
-                        OBTENER TODO AHORA
-                    </button>
-                </div>
-            </div>
-            
-            </div>
-    </div>
-
-    <footer class="bg-gray-800 text-white py-8 text-center mt-12">
-        <p class="text-gray-400">© 2024 Emprende +50. Todos los derechos reservados.</p>
-        <p class="text-sm text-gray-500 mt-2">Pagos seguros procesados por Mercado Pago</p>
+    <footer class="bg-gray-900 text-white py-12 text-center">
+        <p class="opacity-60">© 2024 Emprende +50 - Argentina</p>
     </footer>
 
     <script>
-        // 1. CONFIGURACIÓN DE SUPABASE
-        const supabaseUrl = 'https://vpritfoexcbdykexotdb.supabase.co'; 
-        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcml0Zm9leGNiZHlrZXhvdGRiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA1NDE3MDAsImV4cCI6MjA4NjExNzcwMH0.tFa_BnpvTICn5uGpLDZ5dHCsk1YOfWm4sXvVuGIojSI';
-        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
-
-        // 2. FUNCIÓN DE COMPRA
-        async function comprar(producto, precio, linkMercadoPago) {
-            // Aquí podríamos pedir el mail antes de ir a pagar para guardarlo como "Lead"
-            // Por simplicidad, redirigimos directo al pago.
-            
-            // Guardamos en LocalStorage qué quería comprar el usuario para usarlo al volver
-            localStorage.setItem('producto_pendiente', producto);
-            
-            // Redirigir a Mercado Pago
-            window.location.href = linkMercadoPago;
+        // Esta función guarda en la memoria del navegador qué producto eligió el usuario
+        // para que cuando vuelva de Mercado Pago, sepamos qué PDF entregarle.
+        function guardarSeleccion(nombreProducto) {
+            localStorage.setItem('producto_pendiente', nombreProducto);
         }
     </script>
 </body>
-
 </html>
+
 
 
