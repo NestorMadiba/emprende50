@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emprender +50 | Tu experiencia es tu capital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <style>
+        /* Ajuste para lectura fácil en +50 */
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; font-size: 18px; color: #333; }
+        .hero-bg { background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%); }
+    </style>
+</head>
+<body class="bg-gray-50">
+
+    <header class="hero-bg text-white py-12 px-4 text-center shadow-lg">
+        <div class="max-w-4xl mx-auto">
+            <h1 class="text-3xl md:text-5xl font-bold mb-4">No empieces de cero. Empieza desde tu experiencia.</h1>
+            <p class="text-xl md:text-2xl font-light opacity-90">
+                Guías prácticas de negocios rentables en Argentina diseñadas para personas mayores de 50 años que buscan reinventarse.
+            </p>
+        </div>
+    </header>
+
+    <section class="py-8 bg-white border-b">
+        <div class="max-w-4xl mx-auto text-center px-4">
+            <p class="text-gray-600 italic">"El mercado no busca juventud, busca confianza y responsabilidad. Justo lo que usted tiene."</p>
+        </div>
+    </section>
+
+    <div class="max-w-6xl mx-auto py-12 px-4">
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-10">Seleccione su próximo emprendimiento</h2>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="products-container">
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-gray-100">
+                <div class="p-6">
+                    <div class="uppercase tracking-wide text-sm text-blue-600 font-bold">Servicios</div>
+                    <h3 class="mt-2 text-2xl leading-tight font-semibold text-gray-900">Acompañamiento Senior</h3>
+                    <p class="mt-2 text-gray-600">Convierta su empatía y responsabilidad en un servicio premium para familias que necesitan confianza.</p>
+                    <div class="mt-4 flex items-baseline">
+                        <span class="text-2xl font-bold text-gray-900">$5.000</span>
+                        <span class="ml-1 text-gray-500 text-sm">ARS</span>
+                    </div>
+                    <button onclick="comprar('Guía Senior Care', 5000, 'LINK_MERCADOPAGO_AQUI')" class="mt-4 w-full bg-blue-600 text-white font-bold py-3 px-4 rounded hover:bg-blue-700 transition duration-200">
+                        Descargar Guía
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow border border-gray-100">
+                <div class="p-6">
+                    <div class="uppercase tracking-wide text-sm text-green-600 font-bold">Gestión</div>
+                    <h3 class="mt-2 text-2xl leading-tight font-semibold text-gray-900">Gestoría de Confianza</h3>
+                    <p class="mt-2 text-gray-600">Utilice su "conocimiento de calle" para solucionar trámites a PyMEs y profesionales ocupados.</p>
+                    <div class="mt-4 flex items-baseline">
+                        <span class="text-2xl font-bold text-gray-900">$5.000</span>
+                        <span class="ml-1 text-gray-500 text-sm">ARS</span>
+                    </div>
+                    <button onclick="comprar('Guía Gestoría', 5000, 'LINK_MERCADOPAGO_AQUI')" class="mt-4 w-full bg-green-600 text-white font-bold py-3 px-4 rounded hover:bg-green-700 transition duration-200">
+                        Descargar Guía
+                    </button>
+                </div>
+            </div>
+
+            <div class="bg-yellow-50 rounded-xl shadow-lg overflow-hidden transform scale-105 border-2 border-yellow-400">
+                <div class="bg-yellow-400 py-2 text-center font-bold text-yellow-900 text-sm">MÁS VENDIDO</div>
+                <div class="p-6">
+                    <div class="uppercase tracking-wide text-sm text-yellow-700 font-bold">Pack Completo</div>
+                    <h3 class="mt-2 text-2xl leading-tight font-bold text-gray-900">Las 7 Guías de Negocio</h3>
+                    <p class="mt-2 text-gray-700">Acceda a todas las investigaciones, casos de éxito y pasos a paso. Ahorre un 40%.</p>
+                    <div class="mt-4 flex items-baseline">
+                        <span class="text-3xl font-bold text-gray-900">$20.000</span>
+                        <span class="ml-1 text-gray-500 text-sm">ARS</span>
+                    </div>
+                    <button onclick="comprar('Pack Completo', 20000, 'LINK_MERCADOPAGO_COMBO')" class="mt-4 w-full bg-gray-900 text-white font-bold py-4 px-4 rounded hover:bg-gray-800 transition duration-200 shadow-lg">
+                        OBTENER TODO AHORA
+                    </button>
+                </div>
+            </div>
+            
+            </div>
+    </div>
+
+    <footer class="bg-gray-800 text-white py-8 text-center mt-12">
+        <p class="text-gray-400">© 2024 Emprende +50. Todos los derechos reservados.</p>
+        <p class="text-sm text-gray-500 mt-2">Pagos seguros procesados por Mercado Pago</p>
+    </footer>
+
+    <script>
+        // 1. CONFIGURACIÓN DE SUPABASE
+        const supabaseUrl = 'TU_SUPABASE_URL_AQUI'; 
+        const supabaseKey = 'TU_SUPABASE_ANON_KEY_AQUI';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        // 2. FUNCIÓN DE COMPRA
+        async function comprar(producto, precio, linkMercadoPago) {
+            // Aquí podríamos pedir el mail antes de ir a pagar para guardarlo como "Lead"
+            // Por simplicidad, redirigimos directo al pago.
+            
+            // Guardamos en LocalStorage qué quería comprar el usuario para usarlo al volver
+            localStorage.setItem('producto_pendiente', producto);
+            
+            // Redirigir a Mercado Pago
+            window.location.href = linkMercadoPago;
+        }
+    </script>
+</body>
+</html>

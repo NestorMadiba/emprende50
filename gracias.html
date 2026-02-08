@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Gracias por su compra!</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</head>
+<body class="bg-gray-50 flex items-center justify-center min-h-screen">
+
+    <div class="bg-white p-8 rounded-xl shadow-lg max-w-md w-full text-center">
+        <div class="mb-4 text-green-500">
+            <svg class="w-16 h-16 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+        </div>
+        <h1 class="text-2xl font-bold text-gray-900 mb-2">¡Pago Exitoso!</h1>
+        <p class="text-gray-600 mb-6">Gracias por confiar en nosotros. Por favor, ingrese su email para recibir su factura y habilitar la descarga inmediata.</p>
+
+        <form id="registro-form" class="space-y-4">
+            <input type="email" id="email" placeholder="Su correo electrónico" required 
+                class="w-full px-4 py-3 border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 outline-none">
+            
+            <button type="submit" class="w-full bg-blue-600 text-white font-bold py-3 px-4 rounded hover:bg-blue-700 transition">
+                Confirmar y Descargar
+            </button>
+        </form>
+
+        <div id="download-area" class="hidden mt-6 pt-6 border-t border-gray-100">
+            <p class="text-sm text-gray-500 mb-2">Su descarga está lista:</p>
+            <a id="download-link" href="#" class="block w-full bg-green-600 text-white font-bold py-3 px-4 rounded hover:bg-green-700">
+                DESCARGAR PDF AHORA
+            </a>
+        </div>
+    </div>
+
+    <script>
+        const supabaseUrl = 'TU_SUPABASE_URL_AQUI'; 
+        const supabaseKey = 'TU_SUPABASE_ANON_KEY_AQUI';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
+        // Links de descarga (Debes poner los links públicos de tu Supabase Storage aquí)
+        const descargas = {
+            'Guía Senior Care': 'LINK_DE_SUPABASE_AL_PDF_1',
+            'Guía Gestoría': 'LINK_DE_SUPABASE_AL_PDF_2',
+            'Pack Completo': 'LINK_DE_SUPABASE_AL_PDF_FULL'
+        };
+
+        const form = document.getElementById('registro-form');
+        const downloadArea = document.getElementById('download-area');
+        const downloadLink = document.getElementById('download-link');
+
+        // Recuperar qué producto quería comprar
+        const producto = localStorage.getItem('producto_pendiente') || 'Pack Completo';
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            
+            // 1. Guardar en BD Supabase
+            const { error } = await supabase
+                .from('ventas')
+                .insert({ 
+                    email_cliente: email,
+                    producto_comprado: producto,
+                    id_pago_mp: 'verificado_frontend' // Idealmente esto viene de la URL
+                });
+
+            if (error) {
+                console.error('Error guardando:', error);
+                alert('Hubo un error registrando sus datos, pero puede descargar igual.');
+            }
+
+            // 2. Mostrar botón de descarga
+            const linkPDF = descargas[producto];
+            if(linkPDF) {
+                downloadLink.href = linkPDF;
+                downloadLink.setAttribute('download', producto + '.pdf');
+                form.style.display = 'none'; // Ocultar form
+                downloadArea.classList.remove('hidden'); // Mostrar descarga
+            } else {
+                alert('Error localizando el archivo. Contáctenos.');
+            }
+        });
+    </script>
+</body>
+</html>
