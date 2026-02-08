@@ -5,158 +5,164 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emprende +50 | Reinventarse con Experiencia</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <style>
         body { font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
         .gradient-brand { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); }
+        .gradient-free { background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%); }
     </style>
 </head>
 <body class="bg-gray-50 text-gray-800">
 
-    <nav class="bg-white shadow-sm py-4">
+    <nav class="bg-white shadow-sm py-4 sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
             <span class="text-2xl font-bold text-blue-900 italic">Emprende+50</span>
-            <span class="text-sm font-medium bg-blue-100 text-blue-800 px-3 py-1 rounded-full">Argentina</span>
+            <div class="hidden md:flex space-x-6 text-sm font-bold uppercase tracking-wider">
+                <a href="#guias" class="hover:text-blue-600">Guías Paso a Paso</a>
+                <a href="#gratis" class="text-orange-600 hover:text-orange-700">Prueba Gratuita</a>
+                <a href="#contacto" class="hover:text-blue-600">Contacto</a>
+            </div>
         </div>
     </nav>
 
     <header class="gradient-brand text-white py-16 px-4">
         <div class="max-w-4xl mx-auto text-center">
-            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">
-                Su experiencia vale dinero. <br>Es hora de monetizarla.
-            </h1>
-            <p class="text-xl md:text-2xl mb-8 opacity-90 font-light">
-                Descargue guías prácticas paso a paso para iniciar negocios rentables en Argentina, diseñados específicamente para personas con trayectoria y compromiso.
+            <h1 class="text-4xl md:text-6xl font-extrabold mb-6 leading-tight">Su experiencia vale dinero.</h1>
+            <p class="text-xl md:text-2xl mb-8 opacity-90 font-light italic">
+                "No me desvincularon, me dieron la oportunidad de ser mi propio jefe."
             </p>
-            <div class="flex justify-center gap-4 text-sm font-semibold">
-                <span>✓ Sin jefes</span>
-                <span>✓ Baja inversión</span>
-                <span>✓ Confiable</span>
-            </div>
+            <a href="#guias" class="bg-white text-blue-900 font-bold py-4 px-8 rounded-full shadow-lg hover:bg-gray-100 transition inline-block"> Ver Emprendimientos </a>
         </div>
     </header>
 
-    <main class="max-w-6xl mx-auto py-16 px-4">
+    <section id="gratis" class="py-12 px-4">
+        <div class="max-w-4xl mx-auto bg-white rounded-3xl shadow-2xl overflow-hidden border-2 border-orange-400 flex flex-col md:flex-row">
+            <div class="gradient-free p-8 text-white md:w-1/3 flex flex-col justify-center">
+                <h3 class="text-3xl font-bold mb-2">¿Dudas?</h3>
+                <p class="text-lg opacity-90">Descargue gratis el reporte: <strong>"Los 5 errores que todo emprendedor de +50 debe evitar en Argentina"</strong>.</p>
+            </div>
+            <div class="p-8 md:w-2/3">
+                <p class="mb-4 text-gray-600 font-medium text-lg">Déjenos su email y le enviamos un adelanto exclusivo de nuestras guías sin costo.</p>
+                <form id="free-lead-form" class="flex flex-col sm:flex-row gap-3">
+                    <input type="email" id="lead-email" placeholder="Su mejor email aquí" required 
+                        class="flex-grow px-4 py-3 border-2 border-gray-200 rounded-xl focus:border-orange-500 outline-none transition">
+                    <button type="submit" class="bg-orange-600 text-white font-bold py-3 px-6 rounded-xl hover:bg-orange-700 shadow-md">
+                        Enviar Prueba Gratis
+                    </button>
+                </form>
+                <p id="lead-msg" class="mt-3 text-sm text-green-600 font-bold hidden">¡Enviado! Revise su casilla (y la carpeta de Spam).</p>
+            </div>
+        </div>
+    </section>
+
+    <main id="guias" class="max-w-6xl mx-auto py-12 px-4">
+        <h2 class="text-3xl font-bold text-center mb-12">Nuestras Guías de Negocio</h2>
         <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col">
-                <div class="p-8 flex-grow">
-                    <h3 class="text-2xl font-bold mb-3">Acompañamiento Senior</h3>
-                    <p class="text-gray-600 mb-6">Gestione servicios de asistencia no médica para adultos mayores. La confianza es su mayor activo.</p>
-                    <div class="text-3xl font-bold text-blue-600 mb-6">$5.000 <span class="text-sm text-gray-400 font-normal">ARS</span></div>
-                </div>
-                <div class="p-8 pt-0">
-                    <a href="TU_LINK_MERCADO_PAGO_1" 
-                       onclick="guardarSeleccion('Guía Senior Care')"
-                       class="block w-full text-center bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-md">
-                        Comprar Guía PDF
-                    </a>
-                </div>
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 flex flex-col">
+                <h3 class="text-2xl font-bold mb-3">Acompañamiento Senior</h3>
+                <p class="text-gray-600 mb-6 flex-grow">Servicios de asistencia profesional. La confianza es el capital que los años le dieron.</p>
+                <div class="text-3xl font-bold text-blue-600 mb-6">$5.000 <span class="text-sm text-gray-400 font-normal">ARS</span></div>
+                <a href="TU_LINK_MERCADO_PAGO_1" onclick="guardarSeleccion('Guía Senior Care')" class="block w-full text-center bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 shadow-md"> Comprar PDF </a>
             </div>
 
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col">
-                <div class="p-8 flex-grow">
-                    <h3 class="text-2xl font-bold mb-3">Gestoría de Confianza</h3>
-                    <p class="text-gray-600 mb-6">Servicios de trámites y logística para PyMEs. Aproveche su conocimiento de la burocracia local.</p>
-                    <div class="text-3xl font-bold text-blue-600 mb-6">$5.000 <span class="text-sm text-gray-400 font-normal">ARS</span></div>
-                </div>
-                <div class="p-8 pt-0">
-                    <a href="TU_LINK_MERCADO_PAGO_2" 
-                       onclick="guardarSeleccion('Guía Gestoría')"
-                       class="block w-full text-center bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-md">
-                        Comprar Guía PDF
-                    </a>
-                </div>
+            <div class="bg-blue-50 rounded-2xl shadow-xl border-2 border-blue-500 p-8 flex flex-col transform md:scale-105">
+                <div class="text-blue-600 font-bold text-center text-sm mb-2 uppercase tracking-widest">Opción más completa</div>
+                <h3 class="text-2xl font-bold mb-3 text-center">Combo 7 Guías</h3>
+                <p class="text-gray-700 mb-6 text-center">Toda nuestra investigación en un solo archivo. Empiece hoy su nueva etapa.</p>
+                <div class="text-4xl font-black text-blue-700 mb-2 text-center">$20.000</div>
+                <p class="text-sm text-green-600 font-bold mb-6 text-center italic italic italic">Ahorro inmediato del 40%</p>
+                <a href="TU_LINK_MERCADO_PAGO_COMBO" onclick="guardarSeleccion('Pack Completo')" class="block w-full text-center bg-gray-900 text-white font-bold py-5 rounded-xl hover:bg-black shadow-xl"> DESCARGAR PACK </a>
             </div>
 
-            <div class="bg-blue-50 rounded-2xl shadow-xl border-2 border-blue-500 overflow-hidden flex flex-col transform md:scale-105">
-                <div class="bg-blue-500 text-white text-center py-2 text-sm font-bold tracking-widest">RECOMENDADO</div>
-                <div class="p-8 flex-grow text-center">
-                    <h3 class="text-2xl font-bold mb-3 italic">Combo 7 Emprendimientos</h3>
-                    <p class="text-gray-700 mb-6 font-medium text-lg">Acceda a TODAS las guías. La solución definitiva para su reinvención laboral.</p>
-                    <div class="text-4xl font-black text-blue-700 mb-2">$20.000</div>
-                    <p class="text-sm text-green-600 font-bold mb-6 italic">Ahorre más del 40%</p>
-                </div>
-                <div class="p-8 pt-0">
-                    <a href="https://mpago.la/1F2nhuM" 
-                       onclick="guardarSeleccion('Pack Completo')"
-                       class="block w-full text-center bg-gray-900 text-white font-bold py-5 rounded-xl hover:bg-black transition shadow-xl">
-                        DESCARGAR TODO EL PACK
-                    </a>
-                </div>
+            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 p-8 flex flex-col">
+                <h3 class="text-2xl font-bold mb-3">Gestoría de Confianza</h3>
+                <p class="text-gray-600 mb-6 flex-grow">Haga que su paciencia y saber hacer administrativo trabajen para usted.</p>
+                <div class="text-3xl font-bold text-blue-600 mb-6">$5.000 <span class="text-sm text-gray-400 font-normal">ARS</span></div>
+                <a href="TU_LINK_MERCADO_PAGO_2" onclick="guardarSeleccion('Guía Gestoría')" class="block w-full text-center bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 shadow-md"> Comprar PDF </a>
             </div>
-
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col">
-                <div class="p-8 flex-grow">
-                    <h3 class="text-2xl font-bold mb-3">Mantenimiento de Hogar</h3>
-                    <p class="text-gray-600 mb-6">Oficios de precisión y responsabilidad. El cliente busca a alguien que cumpla y sepa.</p>
-                    <div class="text-3xl font-bold text-blue-600 mb-6">$5.000 <span class="text-sm text-gray-400 font-normal">ARS</span></div>
-                </div>
-                <div class="p-8 pt-0">
-                    <a href="TU_LINK_MERCADO_PAGO_4" 
-                       onclick="guardarSeleccion('Guía Reparaciones')"
-                       class="block w-full text-center bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-md">
-                        Comprar Guía PDF
-                    </a>
-                </div>
             </div>
-
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col">
-                <div class="p-8 flex-grow">
-                    <h3 class="text-2xl font-bold mb-3">Viandas Caseras</h3>
-                    <p class="text-gray-600 mb-6">Cree un negocio de cocina saludable desde casa para el barrio u oficinas.</p>
-                    <div class="text-3xl font-bold text-blue-600 mb-6">$5.000 <span class="text-sm text-gray-400 font-normal">ARS</span></div>
-                </div>
-                <div class="p-8 pt-0">
-                    <a href="TU_LINK_MERCADO_PAGO_5" 
-                       onclick="guardarSeleccion('Guía Viandas')"
-                       class="block w-full text-center bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-md">
-                        Comprar Guía PDF
-                    </a>
-                </div>
-            </div>
-
-            <div class="bg-white rounded-2xl shadow-sm border border-gray-200 overflow-hidden flex flex-col">
-                <div class="p-8 flex-grow">
-                    <h3 class="text-2xl font-bold mb-3">Mentoría PyME</h3>
-                    <p class="text-gray-600 mb-6">Asesore a dueños de negocios pequeños sobre procesos y gestión profesional.</p>
-                    <div class="text-3xl font-bold text-blue-600 mb-6">$5.000 <span class="text-sm text-gray-400 font-normal">ARS</span></div>
-                </div>
-                <div class="p-8 pt-0">
-                    <a href="TU_LINK_MERCADO_PAGO_6" 
-                       onclick="guardarSeleccion('Guía Mentoría')"
-                       class="block w-full text-center bg-blue-600 text-white font-bold py-4 rounded-xl hover:bg-blue-700 transition shadow-md">
-                        Comprar Guía PDF
-                    </a>
-                </div>
-            </div>
-
-        </div>
     </main>
 
-    <section class="bg-gray-100 py-12">
-        <div class="max-w-4xl mx-auto px-4 text-center">
-            <h4 class="text-lg font-bold mb-4 uppercase tracking-widest text-gray-500 italic">Pago 100% Seguro</h4>
-            <p class="text-gray-600 leading-relaxed">
-                Al hacer clic en el botón, será redirigido a <strong>Mercado Pago</strong> para abonar de forma segura. 
-                Luego de pagar, el sistema lo traerá automáticamente de regreso para que pueda descargar su archivo PDF.
-            </p>
+    <section id="contacto" class="bg-white py-16 px-4 border-t border-gray-200">
+        <div class="max-w-4xl mx-auto">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl font-bold mb-4">¿Prefiere hablar con nosotros?</h2>
+                <p class="text-lg text-gray-600 font-medium italic">"Entendemos sus dudas porque hablamos el mismo idioma."</p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+                <div class="space-y-6">
+                    <div class="flex items-center space-x-4 text-blue-900">
+                        <div class="bg-blue-100 p-3 rounded-full">✉</div>
+                        <div>
+                            <p class="text-sm font-bold uppercase text-gray-500">Email Directo</p>
+                            <p class="text-lg font-semibold">TU_MAIL_AQUI@ejemplo.com</p>
+                        </div>
+                    </div>
+                    <div class="flex items-center space-x-4 text-green-700">
+                        <div class="bg-green-100 p-3 rounded-full">💬</div>
+                        <div>
+                            <p class="text-sm font-bold uppercase text-gray-500">Respondemos en el día</p>
+                            <p class="text-lg font-semibold italic">Su consulta no molesta.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="contact-form" class="space-y-4">
+                    <input type="text" placeholder="Su Nombre" required class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl outline-none focus:border-blue-500">
+                    <input type="email" placeholder="Su Email" required class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl outline-none focus:border-blue-500">
+                    <textarea placeholder="¿En qué podemos ayudarle?" rows="4" required class="w-full px-4 py-3 border-2 border-gray-200 rounded-xl outline-none focus:border-blue-500"></textarea>
+                    <button type="submit" class="w-full bg-blue-900 text-white font-bold py-4 rounded-xl hover:bg-blue-800 shadow-md transition"> Enviar Consulta </button>
+                </form>
+            </div>
         </div>
     </section>
 
     <footer class="bg-gray-900 text-white py-12 text-center">
-        <p class="opacity-60">© 2024 Emprende +50 - Argentina</p>
+        <p class="opacity-60 text-sm">© 2024 Emprende +50 - Buenos Aires, Argentina</p>
+        <p class="text-xs opacity-40 mt-2 italic text-blue-200">"Nunca es tarde para ser lo que podrías haber sido."</p>
     </footer>
 
     <script>
-        // Esta función guarda en la memoria del navegador qué producto eligió el usuario
-        // para que cuando vuelva de Mercado Pago, sepamos qué PDF entregarle.
+        // 1. Configuración de Supabase
+        const supabaseUrl = 'TU_SUPABASE_URL_AQUI'; 
+        const supabaseKey = 'TU_SUPABASE_ANON_KEY_AQUI';
+        const supabase = supabase.createClient(supabaseUrl, supabaseKey);
+
         function guardarSeleccion(nombreProducto) {
             localStorage.setItem('producto_pendiente', nombreProducto);
         }
+
+        // 2. Manejo de Lead Magnet (Prueba Gratis)
+        document.getElementById('free-lead-form').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('lead-email').value;
+            
+            // Guardar en Supabase tabla 'prospectos'
+            const { error } = await supabase
+                .from('prospectos')
+                .insert([{ email_cliente: email, producto_comprado: 'Prueba Gratis' }]);
+
+            if (!error) {
+                document.getElementById('lead-msg').classList.remove('hidden');
+                document.getElementById('lead-email').value = '';
+                // Aquí podrías disparar la descarga automática del "mini PDF" gratuito
+                window.open('URL_DE_TU_PDF_GRATUITO_AQUI', '_blank');
+            } else {
+                alert("Error al guardar. Reintente por favor.");
+            }
+        });
+
+        // 3. Manejo de Formulario de Contacto
+        document.getElementById('contact-form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('¡Gracias! Hemos recibido su consulta. Le responderemos a la brevedad.');
+            e.target.reset();
+        });
     </script>
 </body>
 </html>
-
 
 
 
