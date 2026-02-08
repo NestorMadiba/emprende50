@@ -57,7 +57,7 @@
                         <span class="text-2xl font-bold text-gray-900">$5.000</span>
                         <span class="ml-1 text-gray-500 text-sm">ARS</span>
                     </div>
-                    <button onclick="comprar('Guía Gestoría', 5000, 'LINK_MERCADOPAGO_AQUI')" class="mt-4 w-full bg-green-600 text-white font-bold py-3 px-4 rounded hover:bg-green-700 transition duration-200">
+                    <button onclick="comprar('Guía Gestoría', 5000, 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcml0Zm9leGNiZHlrZXhvdGRiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA1NDE3MDAsImV4cCI6MjA4NjExNzcwMH0.tFa_BnpvTICn5uGpLDZ5dHCsk1YOfWm4sXvVuGIojSI')" class="mt-4 w-full bg-green-600 text-white font-bold py-3 px-4 rounded hover:bg-green-700 transition duration-200">
                         Descargar Guía
                     </button>
                 </div>
@@ -73,7 +73,7 @@
                         <span class="text-3xl font-bold text-gray-900">$20.000</span>
                         <span class="ml-1 text-gray-500 text-sm">ARS</span>
                     </div>
-                    <button onclick="comprar('Pack Completo', 20000, 'LINK_MERCADOPAGO_COMBO')" class="mt-4 w-full bg-gray-900 text-white font-bold py-4 px-4 rounded hover:bg-gray-800 transition duration-200 shadow-lg">
+                    <button onclick="comprar('Pack Completo', 20000, 'https://mpago.la/1F2nhuM')" class="mt-4 w-full bg-gray-900 text-white font-bold py-4 px-4 rounded hover:bg-gray-800 transition duration-200 shadow-lg">
                         OBTENER TODO AHORA
                     </button>
                 </div>
@@ -89,8 +89,8 @@
 
     <script>
         // 1. CONFIGURACIÓN DE SUPABASE
-        const supabaseUrl = 'TU_SUPABASE_URL_AQUI'; 
-        const supabaseKey = 'TU_SUPABASE_ANON_KEY_AQUI';
+        const supabaseUrl = 'https://vpritfoexcbdykexotdb.supabase.co'; 
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcml0Zm9leGNiZHlrZXhvdGRiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA1NDE3MDAsImV4cCI6MjA4NjExNzcwMH0.tFa_BnpvTICn5uGpLDZ5dHCsk1YOfWm4sXvVuGIojSI';
         const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
         // 2. FUNCIÓN DE COMPRA
@@ -106,4 +106,5 @@
         }
     </script>
 </body>
+
 </html>
