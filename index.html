@@ -125,36 +125,67 @@
     </footer>
 
     <script>
-        // 1. Configuración de Supabase
-        const supabaseUrl = 'TU_SUPABASE_URL_AQUI'; 
-        const supabaseKey = 'TU_SUPABASE_ANON_KEY_AQUI';
+        // 1. TUS CLAVES DE SUPABASE (¡Revisar que estén pegadas!)
+        const supabaseUrl = 'https://vpritfoexcbdykexotdb.supabase.co'; 
+        const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcml0Zm9leGNiZHlrZXhvdGRiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA1NDE3MDAsImV4cCI6MjA4NjExNzcwMH0.tFa_BnpvTICn5uGpLDZ5dHCsk1YOfWm4sXvVuGIojSI';
         const supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
+        // Link de tu PDF gratuito (Súbelo a Supabase Storage y pon el link público aquí)
+        // Si no tienes uno aún, pon cualquier link para probar, ej: 'https://google.com'
+        const URL_PDF_GRATUITO = 'https://vpritfoexcbdykexotdb.supabase.co/storage/v1/object/public/errores+50/Propuesta%20de%20Negocio.docx';
+
+        // Función para guardar selección de compra (igual que antes)
         function guardarSeleccion(nombreProducto) {
             localStorage.setItem('producto_pendiente', nombreProducto);
         }
 
-        // 2. Manejo de Lead Magnet (Prueba Gratis)
-        document.getElementById('free-lead-form').addEventListener('submit', async (e) => {
-            e.preventDefault();
+        // 2. LÓGICA DEL FORMULARIO GRATUITO (LEAD MAGNET)
+        const formGratis = document.getElementById('free-lead-form');
+        const btnGratis = formGratis.querySelector('button'); // El botón de enviar
+
+        formGratis.addEventListener('submit', async (e) => {
+            e.preventDefault(); // Evita que la página se recargue
+            
+            // 1. Feedback visual: Cambiar texto del botón para que sepan que "está pensando"
+            const textoOriginal = btnGratis.innerText;
+            btnGratis.innerText = "Procesando...";
+            btnGratis.disabled = true; // Evitar doble clic
+
             const email = document.getElementById('lead-email').value;
             
-            // Guardar en Supabase tabla 'prospectos'
-            const { error } = await supabase
-                .from('prospectos')
-                .insert([{ email_cliente: email, producto_comprado: 'Prueba Gratis' }]);
+            // 2. Guardar en Supabase
+            try {
+                const { error } = await supabase
+                    .from('prospectos') // Asegúrate que la tabla se llame así en Supabase
+                    .insert([{ 
+                        email_cliente: email, 
+                        producto_comprado: 'Lead Magnet (5 Errores)' 
+                    }]);
 
-            if (!error) {
-                document.getElementById('lead-msg').classList.remove('hidden');
+                if (error) throw error; // Si hay error, salta al catch
+
+                // 3. ÉXITO: Avisar y Entregar
+                alert("¡Felicidades! Su registro fue exitoso. La descarga comenzará automáticamente.");
+                
+                // Opción A: Abrir en nueva pestaña
+                window.open(URL_PDF_GRATUITO, '_blank');
+                
+                // Limpiar el formulario y restaurar botón
                 document.getElementById('lead-email').value = '';
-                // Aquí podrías disparar la descarga automática del "mini PDF" gratuito
-                window.open('URL_DE_TU_PDF_GRATUITO_AQUI', '_blank');
-            } else {
-                alert("Error al guardar. Reintente por favor.");
+                btnGratis.innerText = "¡Enviado!";
+                btnGratis.classList.remove('bg-orange-600');
+                btnGratis.classList.add('bg-green-600'); // Poner botón verde
+
+            } catch (error) {
+                console.error('Error:', error);
+                alert("Hubo un error al guardar: " + error.message);
+                // Restaurar botón si falló
+                btnGratis.innerText = textoOriginal;
+                btnGratis.disabled = false;
             }
         });
 
-        // 3. Manejo de Formulario de Contacto
+        // 3. Formulario de Contacto (Simple)
         document.getElementById('contact-form').addEventListener('submit', (e) => {
             e.preventDefault();
             alert('¡Gracias! Hemos recibido su consulta. Le responderemos a la brevedad.');
@@ -163,6 +194,7 @@
     </script>
 </body>
 </html>
+
 
 
 
