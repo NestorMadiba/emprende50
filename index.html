@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Emprende +50 | Reinventarse con Experiencia</title>
@@ -125,76 +126,93 @@
     </footer>
 
     <script>
-        // 1. TUS CLAVES DE SUPABASE (¡Revisar que estén pegadas!)
+        // --- ZONA DE DIAGNÓSTICO ---
+        console.log("1. El script ha iniciado correctamente.");
+        
+        // Verificamos si Supabase cargó
+        if (typeof supabase === 'undefined') {
+            alert("ERROR CRÍTICO: La librería de Supabase no se cargó. Revisa el <head> de tu HTML.");
+        } else {
+            console.log("2. Librería Supabase detectada.");
+        }
+
+        // --- TUS CLAVES (Revisar que no haya espacios extra) ---
         const supabaseUrl = 'https://vpritfoexcbdykexotdb.supabase.co'; 
         const supabaseKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcml0Zm9leGNiZHlrZXhvdGRiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA1NDE3MDAsImV4cCI6MjA4NjExNzcwMH0.tFa_BnpvTICn5uGpLDZ5dHCsk1YOfWm4sXvVuGIojSI';
-        const supabase = supabase.createClient(https://vpritfoexcbdykexotdb.supabase.co,eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZwcml0Zm9leGNiZHlrZXhvdGRiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA1NDE3MDAsImV4cCI6MjA4NjExNzcwMH0.tFa_BnpvTICn5uGpLDZ5dHCsk1YOfWm4sXvVuGIojSI;
-);
+        
+        // Inicializamos
+        const _supabase = supabase.createClient(supabaseUrl, supabaseKey);
 
-        // Link de tu PDF gratuito (Súbelo a Supabase Storage y pon el link público aquí)
-        // Si no tienes uno aún, pon cualquier link para probar, ej: 'https://google.com'
-        const URL_PDF_GRATUITO = 'https://vpritfoexcbdykexotdb.supabase.co/storage/v1/object/public/errores+50/Propuesta%20de%20Negocio.docx';
+        // Link de tu PDF gratuito
+        const URL_PDF_GRATUITO = 'https://www.tiktok.com/';
 
-        // Función para guardar selección de compra (igual que antes)
+        // --- LÓGICA DEL FORMULARIO ---
+        // Esperamos a que todo el HTML cargue antes de buscar el botón
+        document.addEventListener('DOMContentLoaded', function() {
+            
+            console.log("3. El HTML terminó de cargar.");
+            
+            const formGratis = document.getElementById('free-lead-form');
+            
+            // Verificación visual de que encontró el formulario
+            if (!formGratis) {
+                alert("ERROR: No encuentro el formulario con id 'free-lead-form'. Revisa tu HTML.");
+                return;
+            }
+
+            // Escuchar el evento "Submit"
+            formGratis.addEventListener('submit', async function(e) {
+                e.preventDefault(); // ¡ALTO! No recargues la página
+                
+                alert("¡CLIC DETECTADO! Intentando guardar en Supabase..."); // ESTA ES LA PRUEBA DE FUEGO
+
+                const btn = formGratis.querySelector('button');
+                const emailInput = document.getElementById('lead-email');
+                const email = emailInput.value;
+
+                btn.innerText = "Guardando...";
+                btn.disabled = true;
+
+                try {
+                    console.log("Intentando guardar:", email);
+
+                    // Insertar en Supabase
+                    const { data, error } = await _supabase
+                        .from('prospectos')
+                        .insert([{ 
+                            email_cliente: email, 
+                            producto_comprado: 'Lead Magnet (5 Errores)' 
+                        }]);
+
+                    if (error) {
+                        throw error; // Si hay error, saltamos al catch
+                    }
+
+                    // ¡ÉXITO!
+                    alert("¡GUARDADO CON ÉXITO! Ahora deberías ver el PDF.");
+                    window.open(URL_PDF_GRATUITO, '_blank');
+                    
+                    // Limpiar
+                    emailInput.value = '';
+                    btn.innerText = "¡Enviado!";
+
+                } catch (err) {
+                    console.error("Error real:", err);
+                    alert("HUBO UN ERROR: " + err.message);
+                    btn.innerText = "Reintentar";
+                    btn.disabled = false;
+                }
+            });
+        });
+
+        // Función auxiliar para los botones de compra
         function guardarSeleccion(nombreProducto) {
             localStorage.setItem('producto_pendiente', nombreProducto);
         }
-
-        // 2. LÓGICA DEL FORMULARIO GRATUITO (LEAD MAGNET)
-        const formGratis = document.getElementById('free-lead-form');
-        const btnGratis = formGratis.querySelector('button'); // El botón de enviar
-
-        formGratis.addEventListener('submit', async (e) => {
-            e.preventDefault(); // Evita que la página se recargue
-            
-            // 1. Feedback visual: Cambiar texto del botón para que sepan que "está pensando"
-            const textoOriginal = btnGratis.innerText;
-            btnGratis.innerText = "Procesando...";
-            btnGratis.disabled = true; // Evitar doble clic
-
-            const email = document.getElementById('lead-email').value;
-            
-            // 2. Guardar en Supabase
-            try {
-                const { error } = await supabase
-                    .from('prospectos') // Asegúrate que la tabla se llame así en Supabase
-                    .insert([{ 
-                        email_cliente: email, 
-                        producto_comprado: 'Lead Magnet (5 Errores)' 
-                    }]);
-
-                if (error) throw error; // Si hay error, salta al catch
-
-                // 3. ÉXITO: Avisar y Entregar
-                alert("¡Felicidades! Su registro fue exitoso. La descarga comenzará automáticamente.");
-                
-                // Opción A: Abrir en nueva pestaña
-                window.open(https://vpritfoexcbdykexotdb.supabase.co/storage/v1/object/public/errores+50/Propuesta%20de%20Negocio.docx, '_blank');
-                
-                // Limpiar el formulario y restaurar botón
-                document.getElementById('lead-email').value = '';
-                btnGratis.innerText = "¡Enviado!";
-                btnGratis.classList.remove('bg-orange-600');
-                btnGratis.classList.add('bg-green-600'); // Poner botón verde
-
-            } catch (error) {
-                console.error('Error:', error);
-                alert("Hubo un error al guardar: " + error.message);
-                // Restaurar botón si falló
-                btnGratis.innerText = textoOriginal;
-                btnGratis.disabled = false;
-            }
-        });
-
-        // 3. Formulario de Contacto (Simple)
-        document.getElementById('contact-form').addEventListener('submit', (e) => {
-            e.preventDefault();
-            alert('¡Gracias! Hemos recibido su consulta. Le responderemos a la brevedad.');
-            e.target.reset();
-        });
     </script>
 </body>
 </html>
+
 
 
 
